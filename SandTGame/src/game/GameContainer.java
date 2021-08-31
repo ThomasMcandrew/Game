@@ -1,24 +1,22 @@
 package game;
 
 import game.display.MainFrame;
-import game.display.Renderer;
 import game.game.AbstractGame;
 import game.input.Input;
 
-import javax.swing.*;
-import java.awt.event.KeyEvent;
+import java.awt.*;
+import java.awt.image.BufferStrategy;
 
 public class GameContainer implements Runnable {
 
     private Thread thread;
     private MainFrame window;
-    private Renderer renderer;
     private Input input;
     private AbstractGame game;
-
     private boolean running = false;
-    private final double UPDATE_CAP = 1.0/60.0;
-
+    private final double UPDATE_CAP = 1.0/30.0;
+    private BufferStrategy bs;
+    private Graphics g;
     private int width = 320,height=240;
     private float scale = 4f;
     private String title = "Game";
@@ -31,7 +29,6 @@ public class GameContainer implements Runnable {
 
     public void start(){
         window = new MainFrame(this);
-        renderer = new Renderer(this);
         input = new Input(this);
         thread = new Thread(this);
         thread.run();
@@ -77,12 +74,26 @@ public class GameContainer implements Runnable {
                 }
 
             }
-            if(render){
-                renderer.clear();
+            if(render) {
+                //renderer.clear();
 
-                game.render(this,renderer);
-                window.update();
-                frames++;
+                bs = window.getCanvas().getBufferStrategy();
+                if (bs == null) {
+                    window.getCanvas().createBufferStrategy(3);
+
+                } else {
+                    g = bs.getDrawGraphics();
+                    //Clear Screen
+                    g.clearRect(0, 0, (int)(width * scale), (int)(height * scale));
+                    //Draw Here!
+
+                    game.render(this, g);
+
+                    //End Drawing!
+                    bs.show();
+                    g.dispose();
+                    frames++;
+                }
             }
             else{
                 try {

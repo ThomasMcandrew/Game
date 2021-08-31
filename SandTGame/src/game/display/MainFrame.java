@@ -10,14 +10,8 @@ import java.awt.image.BufferedImage;
 public class MainFrame {
 
     private JFrame frame;
-
-
     private BufferedImage image;
     private Canvas canvas;
-    private BufferStrategy bs;
-    private Graphics g;
-
-
 
     public MainFrame(GameContainer gameContainer){
 
@@ -37,16 +31,10 @@ public class MainFrame {
         frame.setResizable(false);
         frame.setVisible(true);
 
-        canvas.createBufferStrategy(2);
-        bs = canvas.getBufferStrategy();
-        g = bs.getDrawGraphics();
 
     }
 
-    public void update(){
-        g.drawImage(image,0,0,canvas.getWidth(),canvas.getHeight(),null);
-        bs.show();
-    }
+
     public BufferedImage getImage() {
         return image;
     }

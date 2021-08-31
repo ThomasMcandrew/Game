@@ -1,8 +1,22 @@
 package game.assets;
 
-public class Assets {
-    public static void init(){
+import game.assets.imageutils.ImageUtils;
+import game.assets.imageutils.SpriteSheet;
 
+import java.awt.image.BufferedImage;
+import java.util.ArrayList;
+
+public class Assets {
+    public static final int widthSmall = 32, heightSmall = 32;
+    public static ArrayList<BufferedImage> tiles = new ArrayList<>();
+    public static void init(){
+        SpriteSheet sheet = new SpriteSheet(ImageUtils.loadImage("Assets\\floor\\dungeon_tiles.png"));
+
+        for (int y = 0; y < sheet.sheet.getHeight() / heightSmall; y++) {
+            for (int x = 0; x < sheet.sheet.getWidth() / widthSmall; x++) {
+                    tiles.add(sheet.crop(x * widthSmall, y * heightSmall, widthSmall, heightSmall));
+            }
+        }
     }
 
 }

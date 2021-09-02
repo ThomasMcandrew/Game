@@ -8,11 +8,12 @@ import java.util.ArrayList;
 
 public class Assets {
     public static final int widthSmall = 32, heightSmall = 32;
+    public static BufferedImage grass;
     public static ArrayList<BufferedImage> tiles = new ArrayList<>();
     public static ArrayList<BufferedImage> player = new ArrayList<>();
     public static void init(){
-        SpriteSheet sheet = new SpriteSheet(ImageUtils.loadImage("Assets\\floor\\dungeon_tiles.png"));
-
+        SpriteSheet sheet = new SpriteSheet(ImageUtils.loadImage("Assets\\floor\\d.png"));
+        grass = sheet.crop(0,0,widthSmall,heightSmall);
         for (int y = 0; y < sheet.sheet.getHeight() / heightSmall; y++) {
             for (int x = 0; x < sheet.sheet.getWidth() / widthSmall; x++) {
                     tiles.add(sheet.crop(x * widthSmall, y * heightSmall, widthSmall, heightSmall));

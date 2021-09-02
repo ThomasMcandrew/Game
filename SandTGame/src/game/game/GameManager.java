@@ -1,16 +1,14 @@
 package game.game;
 
 import game.GameContainer;
-import game.worlds.AbstractWorld;
-import game.worlds.World1;
+import game.worlds.World;
 
 import java.awt.*;
 
 public class GameManager extends AbstractGame {
-    private AbstractWorld world;
+    private World world;
     public GameManager(){
-        world = new World1();
-        world.load();
+        world = new World();
     }
     @Override
     public void update(GameContainer gameContainer, float dt) {
@@ -20,5 +18,10 @@ public class GameManager extends AbstractGame {
     @Override
     public void render(GameContainer gameContainer, Graphics g) {
         world.render(gameContainer,g);
+    }
+
+    @Override
+    public void load(GameContainer gameContainer) {
+        world.load(gameContainer);
     }
 }

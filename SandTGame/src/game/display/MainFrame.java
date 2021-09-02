@@ -4,7 +4,7 @@ import game.GameContainer;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.image.BufferStrategy;
+
 import java.awt.image.BufferedImage;
 
 public class MainFrame {

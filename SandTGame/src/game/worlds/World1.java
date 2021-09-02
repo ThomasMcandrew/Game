@@ -2,13 +2,14 @@ package game.worlds;
 
 import game.GameContainer;
 import game.assets.Assets;
+import game.entities.Player;
 
 import java.awt.*;
 
 public class World1 extends AbstractWorld {
     @Override
     public void update(GameContainer gameContainer, float dt) {
-
+        player.update(gameContainer,dt);
     }
 
     @Override
@@ -19,6 +20,7 @@ public class World1 extends AbstractWorld {
                         (int)(Assets.tiles.get(map[x][y]).getWidth() * gameContainer.getScale()),(int)(Assets.tiles.get(map[x][y]).getHeight() * gameContainer.getScale()),null);
             }
         }
+        player.render(gameContainer,g);
     }
 
     @Override
@@ -29,6 +31,7 @@ public class World1 extends AbstractWorld {
                 map[x][y] = 25;
             }
         }
+        player = new Player();
     }
 
     @Override
